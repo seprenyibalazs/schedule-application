@@ -1,0 +1,62 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0rem 2.5rem;
+    font-family: 'Mukta', sans-serif;
+}
+
+.nava-logo {
+    width: 250px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.error-container{
+    border: 1px solid rgb(231,231,231);
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.error-class{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+
+.error-class h4{
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 1.5rem 0;
+    color: #3a465a;
+}
+
+.error-class p{
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin-bottom: 2.5rem;
+    color: #919191;
+}
+
+
+.error-class a{
+    font-size: 1.3rem;
+    color: rgba(234, 81, 55, 0.8);
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.error-class a:hover{
+    font-weight: 500;
+    color: #ea5137;
+}
