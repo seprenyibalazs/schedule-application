@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="modifyArchivatorStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Modify The Archivist</title>
+</head>
+<body>
+
+<header>
+  <th:block th:insert="~{fragments/navigation :: navigation}">
+  </th:block>
+</header>
+
+<div class="archivator-container">
+  <div class="text-container">
+    <img src="/pics/nava1.png" class="nava-logo" alt="nava-logo">
+    <p>Válassz egy archivátort</p>
+    <form th:action="${'/modify-schedule'}" method="post">
+      <select name="archivistId">
+        <option th:each="archivator : ${archivatorok}" th:value="${archivator.id}" th:text="${archivator.name}"></option>
+      </select>
+      <input type="hidden" th:value="${datum}" name="datum">
+      <input type="hidden" th:value="${idOfSchedule}" name="idOfSchedule">
+      <input class="action-gomb" type="submit" value="Kiválaszt">
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

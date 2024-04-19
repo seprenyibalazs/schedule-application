@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="naptarStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Beosztás</title>
+</head>
+<body>
+
+<header>
+  <th:block th:insert="~{fragments/navigation :: navigation}">
+  </th:block>
+</header>
+
+<h1>Heti munkabeosztás</h1>
+
+<p class="weekdays" th:text="${scheduleStart} + ' - ' +${scheduleEnd}"></p>
+
+<div class="date-picker">
+  <form th:action="${'/naptar'}" method="post">
+    <label for="datum-modositas">Válassz hetet:</label>
+    <input id="datum-modositas" type="date" name="datum">
+
+    <select class="archivist-picker" name="selectedArchivist">
+      <option value="0" >Válassz archivátort...</option>
+      <option th:each="archivator : ${archivatorok}" th:value="${archivator.id}" th:text="${archivator.name}"></option>
+    </select>
+    <input class="action-gomb" type="submit" value="Kiválaszt">
+  </form>
+</div>
+<div class="naptar-container">
+  <div class="naptar-napok">
+    <h3>Hétfő</h3>
+    <table>
+      <tr th:each="schedule : ${mondaysSchedule}">
+        <td class="chanel-name" th:text="${schedule.chanel.name}"></td>
+        <td class="broadcast" th:text="${schedule.broadcast}"></td>
+        <td class="archivist-name" th:text="${schedule.archivist.name}"></td>
+        <td>
+          <form th:action="${'/modify-schedule-day'}" method="post">
+            <input type="hidden" name="scheduleId" th:value="${schedule.id}">
+            <input class="edit-icon" type="submit" value="✎">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="naptar-napok">
+    <h3>Kedd</h3>
+    <table>
+      <tr th:each="schedule : ${tuesdaysSchedule}">
+        <td class="chanel-name" th:text="${schedule.chanel.name}"></td>
+        <td class="broadcast" th:text="${schedule.broadcast}"></td>
+        <td class="archivist-name" th:text="${schedule.archivist.name}"></td>
+        <td>
+          <form th:action="${'/modify-schedule-day'}" method="post">
+            <input type="hidden" name="scheduleId" th:value="${schedule.id}">
+            <input class="edit-icon" type="submit" value="✎">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="naptar-napok">
+    <h3>Szerda</h3>
+    <table>
+      <tr th:each="schedule : ${wednesdaysSchedule}">
+        <td class="chanel-name" th:text="${schedule.chanel.name}"></td>
+        <td class="broadcast" th:text="${schedule.broadcast}"></td>
+        <td class="archivist-name" th:text="${schedule.archivist.name}"></td>
+        <td>
+          <form th:action="${'/modify-schedule-day'}" method="post">
+            <input type="hidden" name="scheduleId" th:value="${schedule.id}">
+            <input class="edit-icon" type="submit" value="✎">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="naptar-napok">
+    <h3>Csütörtök</h3>
+    <table>
+      <tr th:each="schedule : ${thursdaysSchedule}">
+        <td class="chanel-name" th:text="${schedule.chanel.name}"></td>
+        <td class="broadcast" th:text="${schedule.broadcast}"></td>
+        <td class="archivist-name" th:text="${schedule.archivist.name}"></td>
+        <td>
+          <form th:action="${'/modify-schedule-day'}" method="post">
+            <input type="hidden" name="scheduleId" th:value="${schedule.id}">
+            <input class="edit-icon" type="submit" value="✎">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="naptar-napok">
+    <h3>Péntek</h3>
+    <table>
+      <tr th:each="schedule : ${fridaysSchedule}">
+        <td class="chanel-name" th:text="${schedule.chanel.name}"></td>
+        <td class="broadcast" th:text="${schedule.broadcast}"></td>
+        <td class="archivist-name" th:text="${schedule.archivist.name}"></td>
+        <td>
+          <form th:action="${'/modify-schedule-day'}" method="post">
+            <input type="hidden" name="scheduleId" th:value="${schedule.id}">
+            <input class="edit-icon" type="submit" value="✎">
+          </form>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

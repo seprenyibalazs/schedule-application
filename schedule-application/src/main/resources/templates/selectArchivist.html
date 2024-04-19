@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="archivatorStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Title</title>
+</head>
+<body>
+
+<header>
+  <th:block th:insert="~{fragments/navigation :: navigation}">
+  </th:block>
+</header>
+
+<h1>Válaszd ki az archivátort!</h1>
+<p class="warning-p">Beosztás után már csak a naptárban fogod tudni módosítani. Gombra kattintást követően automatikusan a naptárba kerül a beosztás.</p>
+
+<div class="archivator-container">
+  <div>
+    <p class="channel-name" th:text="${channelName}"></p>
+    <p class="chosen-day" th:text="${chosenDay}"></p>
+  </div>
+  <div>
+    <p class="broadcast-day-p">Sugárzás napja:</p>
+    <p class="broadcast-day" th:text="${broadcastDay}"></p>
+  </div>
+  <form th:action="${'/assign-archivist-to-channel'}" method="post">
+    <label for="arhivator">Választható arhivátorok: </label>
+    <select id="arhivator" name="selectedArchivist">
+      <option th:each="archivator : ${archivists}" th:value="${archivator.id}" th:text="${archivator.name}"></option>
+    </select>
+    <input type="hidden" name="channelId" th:value="${channelId}">
+    <input type="hidden" name="datum" th:value="${chosenDay}">
+    <input type="hidden" name="broadcast" th:value="${broadcastDay}">
+    <input class="action-gomb" type="submit" value="Kiosztás">
+  </form>
+</div>
+
+</body>
+</html>

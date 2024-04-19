@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="indexStyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Main</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <th:block th:insert="~{fragments/navigation :: navigation}">
+    </th:block>
+</header>
+
+<h1 class="admin-h1">Üdv, Adminisztrátor!</h1>
+
+<p class="weekdays" th:text="${weekStart} + ' - ' +${weekEnd}"></p>
+
+
+<div class="date-picker">
+    <form th:action="${'/'}" method="post">
+        <label for="datum-modositas">Válassz beosztani kívánt hetet:</label>
+        <input id="datum-modositas" type="date" name="datum">
+        <input class="action-gomb" type="submit" value="Kiválaszt">
+    </form>
+</div>
+
+<div class="naptar-container">
+    <div class="naptar-napok">
+        <h3>Péntek</h3>
+        <table>
+            <tr th:each="channel : ${listOfPreviousFri}">
+                <td class="channel-name" th:text="${channel.name}"></td>
+                <td  th:if="${checkTheModifiability}">
+                    <form th:action="${'/achivator-kivalasztas'}" method="post">
+                        <input type="date" name="datum" th:if="${checkTheModifiability}">
+                        <input type="hidden"  th:value="${prevFriday}" name="broadcast">
+                        <input type="hidden" th:value="${channel.id}" name="channelId">
+                        <input class="action-gomb" type="submit" value="Kiosztás">
+                    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="naptar-napok">
+        <h3>Szombat</h3>
+        <table>
+            <tr th:each="channel : ${listOfSaturday}">
+                <td class="channel-name" th:text="${channel.name}"></td>
+                <td th:if="${checkTheModifiability}">
+                    <form th:action="${'/achivator-kivalasztas'}" method="post">
+                        <input type="date" name="datum">
+                        <input type="hidden"  th:value="${saturday}" name="broadcast">
+                        <input type="hidden" th:value="${channel.id}" name="channelId">
+                        <input class="action-gomb" type="submit" value="Kiosztás">
+                    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="naptar-napok">
+        <h3>Vasárnap</h3>
+        <table>
+            <tr th:each="channel : ${listOfSunday}">
+                <td class="channel-name" th:text="${channel.name}"></td>
+                <td th:if="${checkTheModifiability}">
+                    <form th:action="${'/achivator-kivalasztas'}" method="post">
+                        <input type="date" name="datum">
+                        <input type="hidden"  th:value="${sunday}" name="broadcast">
+                        <input type="hidden" th:value="${channel.id}" name="channelId">
+                        <input class="action-gomb" type="submit" value="Kiosztás">
+                    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="naptar-napok">
+        <h3>Hétfő</h3>
+        <table>
+            <tr th:each="channel : ${listOfMonday}">
+                <td class="channel-name" th:text="${channel.name}"></td>
+                <td th:if="${checkTheModifiability}">
+                    <form th:action="${'/achivator-kivalasztas'}" method="post">
+                        <input type="date" name="datum">
+                        <input type="hidden"  th:value="${monday}" name="broadcast">
+                        <input type="hidden" th:value="${channel.id}" name="channelId">
+                        <input class="action-gomb" type="submit" value="Kiosztás">
+                    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="naptar-napok">
+        <h3>Kedd</h3>
+        <table>
+            <tr th:each="channel : ${listOfTuesday}">
+                <td class="channel-name" th:text="${channel.name}"></td>
+                <td th:if="${checkTheModifiability}">
+                    <form th:action="${'/achivator-kivalasztas'}" method="post">
+                        <input type="date" name="datum">
+                        <input type="hidden"  th:value="${tuesday}" name="broadcast">
+                        <input type="hidden" th:value="${channel.id}" name="channelId">
+                        <input class="action-gomb" type="submit" value="Kiosztás">
+                    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="naptar-napok">
+        <h3>Szerda</h3>
+        <table>
+            <tr th:each="channel : ${listOfWednesday}">
+                <td class="channel-name" th:text="${channel.name}"></td>
+                <td th:if="${checkTheModifiability}">
+                    <form th:action="${'/achivator-kivalasztas'}" method="post">
+                        <input type="date" name="datum">
+                        <input type="hidden"  th:value="${wednesday}" name="broadcast">
+                        <input type="hidden" th:value="${channel.id}" name="channelId">
+                        <input class="action-gomb" type="submit" value="Kiosztás">
+                    </form>
+            </tr>
+        </table>
+    </div>
+    <div class="naptar-napok">
+        <h3>Csütörtök</h3>
+        <table>
+            <tr th:each="channel : ${listOfThursday}">
+                <td class="channel-name" th:text="${channel.name}"></td>
+                <td th:if="${checkTheModifiability}">
+                    <form th:action="${'/achivator-kivalasztas'}" method="post">
+                        <input type="date" name="datum">
+                        <input type="hidden"  th:value="${thursday}" name="broadcast">
+                        <input type="hidden" th:value="${channel.id}" name="channelId">
+                        <input class="action-gomb" type="submit" value="Kiosztás">
+                    </form>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>
