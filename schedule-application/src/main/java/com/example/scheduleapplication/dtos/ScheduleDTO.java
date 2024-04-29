@@ -14,7 +14,9 @@ import java.time.LocalDate;
 public class ScheduleDTO {
     private Long id;
     private LocalDate broadcast;
-    private String chanelName;
+    private Long channelId;
+    private String channelName;
     private LocalDate assignmentDay;
+    private Long archivistId;
     private String archivistName;
 }

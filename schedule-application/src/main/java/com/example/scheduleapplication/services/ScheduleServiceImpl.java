@@ -66,7 +66,14 @@ public class ScheduleServiceImpl implements ScheduleService{
         List<Schedule> scheduleList = scheduleRepository.findAll();
 
         return scheduleList.stream()
-                .map(schedule -> new ScheduleDTO(schedule.getId(), schedule.getBroadcast(), schedule.getChanel().getName(), schedule.getAssignmentDay(), schedule.getArchivist().getName()))
+                .map(schedule -> new ScheduleDTO(
+                        schedule.getId(),
+                        schedule.getBroadcast(),
+                        schedule.getChanel().getId(),
+                        schedule.getChanel().getName(),
+                        schedule.getAssignmentDay(),
+                        schedule.getArchivist().getId(),
+                        schedule.getArchivist().getName()))
                 .collect(Collectors.toList());
     }
 
@@ -137,8 +144,10 @@ public class ScheduleServiceImpl implements ScheduleService{
                 .map(schedule -> new ScheduleDTO(
                         schedule.getId(),
                         schedule.getBroadcast(),
+                        schedule.getChanel().getId(),
                         schedule.getChanel().getName(),
                         schedule.getAssignmentDay(),
+                        schedule.getArchivist().getId(),
                         schedule.getArchivist().getName()))
                 .collect(Collectors.toList());
     }
@@ -153,8 +162,10 @@ public class ScheduleServiceImpl implements ScheduleService{
                 .map(schedule -> new ScheduleDTO(
                         schedule.getId(),
                         schedule.getBroadcast(),
+                        schedule.getChanel().getId(),
                         schedule.getChanel().getName(),
                         schedule.getAssignmentDay(),
+                        schedule.getArchivist().getId(),
                         schedule.getArchivist().getName()))
                 .collect(Collectors.toList());
     }
