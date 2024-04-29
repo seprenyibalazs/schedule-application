@@ -2,6 +2,7 @@ package com.example.scheduleapplication.services;
 
 import com.example.scheduleapplication.dtos.ArchivistDTO;
 import com.example.scheduleapplication.models.Archivist;
+import com.example.scheduleapplication.models.Schedule;
 import com.example.scheduleapplication.repositories.ArchivistRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -63,8 +64,9 @@ public class ArchivistServiceImpl implements ArchivistService{
 
     @Override
     public boolean isArchivistWorkThatDay(Archivist archivist, LocalDate assignmentDay) {
-        return archivist.getSchedules().stream()
-                .anyMatch(schedule -> schedule.getAssignmentDay().equals(assignmentDay));
+        Optional<Schedule> scheduleOptional = archivistRepository.isArchivistWorkThatDay(archivist, assignmentDay);
+
+        return scheduleOptional.isPresent();
     }
 
     @Override
