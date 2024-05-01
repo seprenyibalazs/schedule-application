@@ -21,14 +21,9 @@ public class ArchivistServiceImpl implements ArchivistService{
 
     @Override
     public List<Archivist> getThoseArchivistDontWorkThisDay(LocalDate datum) {
-        List<Archivist> archivistList = archivistRepository.findAll();
+        List<Archivist> archivistList = archivistRepository.findNoMatchAssignmentDay(datum);
 
-        List<Archivist> filteredArchivists = archivistList.stream()
-                .filter(archivist -> archivist.getSchedules().stream()
-                        .noneMatch(schedule -> schedule.getAssignmentDay().equals(datum)))
-                .collect(Collectors.toList());
-
-        return filteredArchivists;
+        return archivistList;
     }
 
     @Override
