@@ -15,6 +15,10 @@
     <img src="/pics/nava1.png" class="nava-logo" alt="nava-logo">
     <h4>Hoppá!</h4>
     <p th:text="${missingStuff}"></p>
+    <form th:action="${'/'}" method="post">
+      <input type="hidden"  th:value="${chosenMonday}" name="datum">
+      <input type="submit" value="Vissza a naptárhoz">
+    </form>
     <a href="/">Vissza a napárhoz -></a>
   </div>
 </div>

@@ -90,29 +90,34 @@ public class MainController {
     public String sendDates(@RequestParam(required = false) LocalDate datum,
                             @RequestParam Long channelId,
                             @RequestParam LocalDate broadcast,
+                            @RequestParam LocalDate chosenMonday,
                             Model model){
 
         if(datum == null){
             model.addAttribute("somethingwentwrong", true);
             model.addAttribute("missingStuff", "Kérlek válassz egy dátumot az archiváláshoz!");
+            model.addAttribute("chosenMonday", chosenMonday);
             return "error";
         }
 
         if(datum.equals(broadcast)) {
             model.addAttribute("somethingwentwrong", true);
             model.addAttribute("missingStuff", "Az archiválás nem eshet a sugárzással egy napra, kérlek válassz másik dátumot!");
+            model.addAttribute("chosenMonday", chosenMonday);
             return "error";
         }
 
         if(datum.getDayOfWeek() == DayOfWeek.SATURDAY || datum.getDayOfWeek() == DayOfWeek.SUNDAY) {
             model.addAttribute("somethingwentwrong", true);
             model.addAttribute("missingStuff", "A kiválasztott dátum hétvégére esik, kérlek válassz másik dátumot!");
+            model.addAttribute("chosenMonday", chosenMonday);
             return "error";
         }
 
         if(!datum.isAfter(broadcast)){
             model.addAttribute("somethingwentwrong", true);
             model.addAttribute("missingStuff", "Az archiválás nem eshet a sugárzást megelőző napra, kérlek válasszál másik dátumot!");
+            model.addAttribute("chosenMonday", chosenMonday);
             return "error";
         }
 
@@ -121,6 +126,7 @@ public class MainController {
         if(archivistList.isEmpty()){
             model.addAttribute("somethingwentwrong", true);
             model.addAttribute("missingStuff", datum + " ezen a napon nincs elérhető munkatárs, kérlek válassz egy másik napot!");
+            model.addAttribute("chosenMonday", chosenMonday);
             return "error";
         }
 
