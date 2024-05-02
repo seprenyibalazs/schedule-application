@@ -38,9 +38,12 @@ public class ScheduleController {
     }
 
     @PostMapping("/naptar")
-    public String postSchedule(@RequestParam LocalDate datum,
+    public String postSchedule(@RequestParam(required = false) LocalDate datum,
                                @RequestParam(required = false) Long selectedArchivist,
                                Model model) {
+        if(datum == null){
+            datum = LocalDate.now();
+        }
         LocalDate localMonday = datum.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
 
         if(selectedArchivist != 0 ){
