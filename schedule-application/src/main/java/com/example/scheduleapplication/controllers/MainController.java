@@ -40,8 +40,11 @@ public class MainController {
     }
 
     @PostMapping("/")
-    public String modifyTheWeekOfModifyCalender(@RequestParam LocalDate datum,
+    public String modifyTheWeekOfModifyCalender(@RequestParam(required = false) LocalDate datum,
                                                 Model model){
+        if(datum == null){
+            datum = LocalDate.now();
+        }
         LocalDate currentMonday = datum.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
 
         setChannelsCalendarAttributes(currentMonday, model);
