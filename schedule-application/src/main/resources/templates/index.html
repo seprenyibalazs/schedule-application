@@ -30,7 +30,7 @@
 <div class="date-picker">
     <form th:action="${'/'}" method="post">
         <label for="datum">Válassz beosztani kívánt hetet:</label>
-        <input id="datum" type="date" name="datum">
+        <input id="datum" type="date" name="datum" th:value="${daySelector}">
         <input class="action-gomb" type="submit" value="Kiválaszt">
     </form>
 </div>
@@ -44,7 +44,7 @@
                 <td  th:if="${checkTheModifiability}">
                     <form th:action="${'/achivator-kivalasztas'}" method="post">
                         <input type="date" name="datum" th:if="${checkTheModifiability}">
-                        <input type="hidden"  th:value="${monday}" name="chosenMonday">
+                        <input type="hidden"  th:value="${daySelector}" name="chosenMonday">
                         <input type="hidden"  th:value="${prevFriday}" name="broadcast">
                         <input type="hidden" th:value="${channel.id}" name="channelId">
                         <input class="action-gomb" type="submit" value="Kiosztás">

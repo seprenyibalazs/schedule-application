@@ -34,7 +34,7 @@ public class MainController {
             currentMonday = date;
         }
 
-        setChannelsCalendarAttributes(currentMonday, model);
+        setChannelsCalendarAttributes(currentMonday, date, model);
 
         return "index";
     }
@@ -47,12 +47,14 @@ public class MainController {
         }
         LocalDate currentMonday = datum.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
 
-        setChannelsCalendarAttributes(currentMonday, model);
+        setChannelsCalendarAttributes(currentMonday, datum, model);
 
         return "index";
     }
 
-    private void setChannelsCalendarAttributes(LocalDate day, Model model){
+    private void setChannelsCalendarAttributes(LocalDate day,
+                                               LocalDate datum,
+                                               Model model){
         LocalDate currentMonday = LocalDate.now().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
 
         List<Channel> previousFridayList = channelService.findThoseDayWhatNotAccepted(day.minusDays(3));
@@ -78,6 +80,7 @@ public class MainController {
         model.addAttribute("listOfWednesday", wednesdayList);
         model.addAttribute("thursday", day.plusDays(3));
         model.addAttribute("listOfThursday", thursdayList);
+        model.addAttribute("daySelector", datum);
 
         if(!day.minusDays(3).isBefore(currentMonday.minusDays(3))){
             model.addAttribute("checkTheModifiability", true);
